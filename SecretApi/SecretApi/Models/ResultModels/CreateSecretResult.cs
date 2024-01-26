@@ -5,6 +5,6 @@ namespace SecretApi.Models.ResultModels;
 public class CreateSecretResult
 {
     public bool Succeeded { get; set; }
-    public string? Message { get; set; }
+    public ErrorResponse? Error { get; set; }
     public SecretResponseDto? Data { get; set; }
 }

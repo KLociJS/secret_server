@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SecretApi.Contexts;
 using SecretApi.Models;
 using SecretApi.Models.RequestDto;
+using SecretApi.Models.ResponseDto;
 using SecretApi.Models.ResultModels;
 
 namespace SecretApi.Services;
@@ -23,10 +24,10 @@ public class SecretService : ISecretService
             var secret = new Secret
             {
                 Hash = Guid.NewGuid().ToString(),
-                SecretText = secretRequestDto.Secret,
+                SecretText = secretRequestDto.Secret!,
                 CreatedAt = currentTimestamp,
-                ExpiresAt = currentTimestamp.AddMinutes(secretRequestDto.ExpireAfter),
-                RemainingViews = secretRequestDto.ExpireAfterViews
+                ExpiresAt = currentTimestamp.AddMinutes((double)secretRequestDto.ExpireAfter!),
+                RemainingViews = (int)secretRequestDto.ExpireAfterViews!
             };
 
             await _appDataContext.Secrets.AddAsync(secret);
@@ -35,7 +36,6 @@ public class SecretService : ISecretService
             return new CreateSecretResult
             {
                 Succeeded = true,
-                Message = "Secret created successfully",
                 Data = Secret.ToSecretResponseDto(secret)
             };
 
@@ -57,7 +57,12 @@ public class SecretService : ISecretService
             
             if (!isSecretValid)
             {
-                result.Message = "Secret not found";
+                var errorResponse = new ErrorResponse
+                {
+                    Error = "Secret not found"
+                };
+                
+                result.Error = errorResponse;
                 return result;
             }
 

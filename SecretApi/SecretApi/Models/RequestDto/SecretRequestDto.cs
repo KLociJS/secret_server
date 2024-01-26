@@ -5,9 +5,11 @@ namespace SecretApi.Models.RequestDto;
 public class SecretRequestDto
 {
     [Required]
-    public string Secret { get; set; }
+    public string? Secret { get; set; }
     [Range(1,int.MaxValue)]
-    public int ExpireAfterViews { get; set; }
+    [Required]
+    public int? ExpireAfterViews { get; set; }
     [Range(0,int.MaxValue)]
-    public int ExpireAfter { get; set; }
+    [Required]
+    public int? ExpireAfter { get; set; }
 }

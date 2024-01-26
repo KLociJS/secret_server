@@ -28,12 +28,8 @@ public class SecretController : ControllerBase
                 return Ok(result.Data);
             }
             
-            var errorResponse = new ErrorResponse()
-            {
-                Message = result.Message!
-            };
             
-            return NotFound(errorResponse);
+            return NotFound(result.Error);
         }
         catch (Exception e)
         {
@@ -41,7 +37,7 @@ public class SecretController : ControllerBase
             
             var errorResponse = new ErrorResponse()
             {
-                Message = "Server error"
+                Error = "Server error"
             };
             
             return StatusCode(500, errorResponse);
@@ -53,20 +49,9 @@ public class SecretController : ControllerBase
     {
         try
         {
-            if (!ModelState.IsValid)
-            {
-                var invalidInputError = new ErrorResponse()
-                {
-                    Message = "Invalid input"
-                };
-                
-                return BadRequest();
-            }
-            
             var result = await _secretService.CreateSecretAsync(secretRequestDto);
             
             return Ok(result.Data);
-            
         }
         catch (Exception e)
         {
@@ -74,7 +59,7 @@ public class SecretController : ControllerBase
             
             var errorResponse = new ErrorResponse()
             {
-                Message = "Server error"
+                Error = "Server error"
             };
             
             return StatusCode(500, errorResponse);
