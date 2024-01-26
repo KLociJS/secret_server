@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using SecretApi.Models.RequestDto;
 using SecretApi.Models.ResponseDto;
@@ -17,6 +18,7 @@ public class SecretController : ControllerBase
     }
 
     [HttpGet("{hash}")]
+    [Produces(MediaTypeNames.Application.Json, new string[]{ MediaTypeNames.Application.Xml})]
     public async Task<IActionResult> GetSecret(string hash)
     {
         try

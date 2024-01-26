@@ -14,7 +14,8 @@ builder.Services.AddScoped<ISecretService, SecretService>();
 builder.Services.AddScoped<ICryptographicService, CryptographicService>();
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
