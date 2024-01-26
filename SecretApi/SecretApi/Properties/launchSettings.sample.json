@@ -8,9 +8,6 @@
       "sslPort": 44398
     }
   },
-  "ConnectionStrings": {
-    "DataContext" : "Host=localhost;Port=5432;Database=secretsdb;Username=postgres;Password=postgres"
-  },
   "profiles": {
     "SecretApi": {
       "commandName": "Project",
@@ -19,7 +16,8 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7187;http://localhost:5146",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ENCRYPTION_KEY": "YOUR ENCRYPTION KEY HERE"
       }
     },
     "IIS Express": {
