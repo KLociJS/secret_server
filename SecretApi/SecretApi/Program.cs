@@ -5,10 +5,12 @@ using SecretApi.Services;
 using SecretApi.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDataContext>(
-    options => options.UseNpgsql(builder.Configuration.GetConnectionString("DataContext")));
+    options => options.UseNpgsql(connectionString!)
+    );
 
 builder.Services.AddScoped<ISecretService, SecretService>();
 builder.Services.AddScoped<ICryptographicService, CryptographicService>();
@@ -38,5 +40,14 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Migrate database on startup
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    
+    var context = services.GetRequiredService<AppDataContext>();
+    context.Database.Migrate();
+}
 
 app.Run();
