@@ -16,7 +16,7 @@ public class SecretController : ControllerBase
         _secretService = secretService;
     }
 
-    [HttpGet("/{hash}")]
+    [HttpGet("{hash}")]
     public async Task<IActionResult> GetSecret(string hash)
     {
         try
@@ -49,23 +49,24 @@ public class SecretController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateSecret(SecretRequestDto secretRequestDto)
+    public async Task<IActionResult> CreateSecret([FromForm]SecretRequestDto secretRequestDto)
     {
         try
         {
-            var result = await _secretService.CreateSecretAsync(secretRequestDto);
-
-            if (result.Succeeded)
+            if (!ModelState.IsValid)
             {
-                return Ok(result.Data);
+                var invalidInputError = new ErrorResponse()
+                {
+                    Message = "Invalid input"
+                };
+                
+                return BadRequest();
             }
             
-            var errorResponse = new ErrorResponse()
-            {
-                Message = result.Message!
-            };
+            var result = await _secretService.CreateSecretAsync(secretRequestDto);
             
-            return StatusCode(405, errorResponse);
+            return Ok(result.Data);
+            
         }
         catch (Exception e)
         {
