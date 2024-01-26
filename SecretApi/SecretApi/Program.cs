@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using SecretApi.Contexts;
+using SecretApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDataContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("DataContext")));
+
+builder.Services.AddScoped<ISecretService, SecretService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
