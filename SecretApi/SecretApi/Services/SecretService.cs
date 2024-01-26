@@ -9,12 +9,14 @@ namespace SecretApi.Services;
 
 public class SecretService : ISecretService
 {
-    public SecretService(AppDataContext appDataContext)
+    private readonly AppDataContext _appDataContext;
+    private readonly ICryptographicService _cryptographicService;
+    public SecretService(AppDataContext appDataContext, ICryptographicService cryptographicService)
     {
         _appDataContext = appDataContext;
+        _cryptographicService = cryptographicService;
     }
 
-    private readonly AppDataContext _appDataContext;
 
     public async Task<CreateSecretResult> CreateSecretAsync(SecretRequestDto secretRequestDto)
     {
@@ -24,7 +26,7 @@ public class SecretService : ISecretService
             var secret = new Secret
             {
                 Hash = Guid.NewGuid().ToString(),
-                SecretText = secretRequestDto.Secret!,
+                SecretText = _cryptographicService.Encrypt(secretRequestDto.Secret!),
                 CreatedAt = currentTimestamp,
                 ExpiresAt = currentTimestamp.AddMinutes((double)secretRequestDto.ExpireAfter!),
                 RemainingViews = (int)secretRequestDto.ExpireAfterViews!
@@ -32,6 +34,8 @@ public class SecretService : ISecretService
 
             await _appDataContext.Secrets.AddAsync(secret);
             await _appDataContext.SaveChangesAsync();
+
+            secret.SecretText = secretRequestDto.Secret!;
 
             return new CreateSecretResult
             {
@@ -69,6 +73,8 @@ public class SecretService : ISecretService
             secret!.RemainingViews--;
             await _appDataContext.SaveChangesAsync();
 
+            secret.SecretText = _cryptographicService.Decrypt(secret.SecretText);
+            
             result.Succeeded = true;
             result.Data = Secret.ToSecretResponseDto(secret);
 

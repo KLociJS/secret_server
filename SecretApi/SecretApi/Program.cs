@@ -11,6 +11,7 @@ builder.Services.AddDbContext<AppDataContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("DataContext")));
 
 builder.Services.AddScoped<ISecretService, SecretService>();
+builder.Services.AddScoped<ICryptographicService, CryptographicService>();
 
 
 builder.Services.AddControllers();
