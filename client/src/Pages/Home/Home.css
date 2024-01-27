@@ -10,7 +10,7 @@
 }
 
 .landing-cta {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   text-decoration: none;
   color: var(--text-light);
   border: 1px solid var(--background-secondary);
@@ -21,7 +21,7 @@
     var(--background-primary) 100%
   );
   margin: 2rem 0 0 auto;
-  transition: all 0.3s ease-in-out;
+  transition: border 0.3s ease-in-out;
 }
 
 .landing-cta:hover {
@@ -31,4 +31,17 @@
 .landing-container {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 1000px) {
+  .landing-header {
+    font-size: var(--font-size-3);
+  }
+
+  .landing-intro {
+    font-size: var(--font-size-1);
+  }
+  .landing-cta {
+    padding: 0.5rem 1rem;
+  }
 }
