@@ -2,3 +2,60 @@
   display: flex;
   flex-direction: column;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--main-font);
+  color: var(--text-light);
+}
+
+p {
+  color: var(--text-secondary);
+  max-width: 50ch;
+}
+
+input,
+textarea,
+button {
+  font-family: "Open Sans", sans-serif;
+  font-size: var(--font-size-1);
+}
+
+input,
+textarea {
+  color: var(--text-primary);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+textarea {
+  resize: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-placeholder);
+}
+
+button {
+  color: var(--text-light);
+  border: 1px solid var(--background-secondary);
+  padding: 0.5em 2rem;
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    var(--background-secondary) 0%,
+    var(--background-primary) 100%
+  );
+}
+
+button:hover {
+  cursor: pointer;
+  border-color: var(--background-light);
+}

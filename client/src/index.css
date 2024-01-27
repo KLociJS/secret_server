@@ -3,7 +3,9 @@
 :root {
   --text-light: #eeeeee;
   --text-warning: #fb4949;
+  --text-primary: #1f1f1f;
   --text-secondary: #ececec;
+  --text-placeholder: #797979;
 
   --background-primary: #252570;
   --background-secondary: #1c5a76;
@@ -43,28 +45,5 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: var(--secondary-font);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--main-font);
-  color: var(--text-light);
-}
-
-p {
-  color: var(--text-secondary);
-  max-width: 50ch;
-}
-
-input,
-textarea,
-button {
-  outline: none;
-  border: none;
-  font-family: "Open Sans", sans-serif;
-  color: var(--text-light);
+  min-width: 0;
 }

@@ -28,11 +28,6 @@
   border-color: var(--background-light);
 }
 
-.landing-container {
-  display: flex;
-  flex-direction: column;
-}
-
 @media screen and (max-width: 1000px) {
   .landing-header {
     font-size: var(--font-size-3);

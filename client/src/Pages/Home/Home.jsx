@@ -5,7 +5,7 @@ import "./Home.css";
 
 const Home = () => {
   return (
-    <div className='landing-container'>
+    <div className='container-column'>
       <h1 className='landing-header'>Secret Safe</h1>
       <p className='landing-intro'>
         Safeguard your secrets with SecretSafe. Share securely, read discreetly.
