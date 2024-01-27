@@ -1,7 +1,6 @@
 .main-wrapper {
   background-image: url("./bcg.jpg");
   background-color: var(--background-primary);
-  /* background-position: 1% 30%; */
   background-size: cover;
   position: relative;
 
@@ -18,14 +17,13 @@
   background-color: rgba(7, 0, 89, 0.5);
   width: 100%;
   height: 100%;
-  z-index: 0;
 }
 
 .main-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   max-width: 1200px;
   flex: 1;
   margin: auto;
+  z-index: 2;
+  padding: 2rem;
 }
