@@ -1,0 +1,38 @@
+.nav-wrapper {
+  background: linear-gradient(
+    180deg,
+    var(--background-secondary) 0%,
+    var(--background-primary) 100%
+  );
+}
+
+.nav-bar {
+  display: flex;
+  padding: 0 2rem;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.nav-bar > a:first-child {
+  margin-left: auto;
+}
+
+.nav-link {
+  text-decoration: none;
+  padding: 1rem 0.5rem;
+  color: var(--text-light);
+  font-size: var(--font-size-2);
+  border-bottom: 3px solid transparent;
+  font-family: var(--main-font);
+}
+
+.nav-link:hover {
+  background: linear-gradient(
+    180deg,
+    var(--background-secondary) 15%,
+    var(--background-primary) 100%
+  );
+  border-bottom: 3px solid var(--background-light);
+  transition: background-color 0.3s ease-in-out;
+}
