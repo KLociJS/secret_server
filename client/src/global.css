@@ -34,6 +34,23 @@ textarea {
   border: 1px solid transparent;
 }
 
+input.error,
+textarea.error {
+  border-color: var(--text-warning);
+  color: var(--text-warning);
+}
+
+.error-msg {
+  color: var(--text-warning);
+  min-height: 1rem;
+}
+
+.icon-align {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 textarea {
   resize: none;
 }
