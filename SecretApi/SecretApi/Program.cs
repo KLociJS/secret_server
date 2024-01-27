@@ -7,6 +7,20 @@ using SecretApi.Utils;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
+var  myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+// Apply cors policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myAllowSpecificOrigins,
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:3000", "http://172.17.0.4:80", "*")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
+
 // Add services to the container.
 builder.Services.AddDbContext<AppDataContext>(
     options => options.UseNpgsql(connectionString!)
@@ -36,6 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(myAllowSpecificOrigins);
 
 app.UseAuthorization();
 
