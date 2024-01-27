@@ -57,6 +57,7 @@ h6 {
 
 p {
   color: var(--text-secondary);
+  max-width: 50ch;
 }
 
 input,
