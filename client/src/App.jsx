@@ -12,6 +12,7 @@ import ViewSecret from "./Pages/ViewSecret/ViewSecret";
 
 import "./App.css";
 import { NAV_LINKS } from "./Constants/Constants";
+import "./global.css";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
