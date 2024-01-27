@@ -15,7 +15,7 @@ function SecretForm({
   hasPostError,
 }) {
   return (
-    <form className='secret-form'>
+    <form className='form'>
       <div className='input-container'>
         <input
           type='text'

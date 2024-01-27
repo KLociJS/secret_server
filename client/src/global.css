@@ -51,6 +51,18 @@ textarea.error {
   gap: 0.5rem;
 }
 
+form {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
 textarea {
   resize: none;
 }
