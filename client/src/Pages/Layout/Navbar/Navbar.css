@@ -4,12 +4,12 @@
     var(--background-secondary) 0%,
     var(--background-primary) 100%
   );
+  border-bottom: 1px solid var(--background-light);
 }
 
 .nav-bar {
   display: flex;
   padding: 0 2rem;
-  gap: 1rem;
   max-width: 1200px;
   margin: auto;
 }
@@ -20,7 +20,7 @@
 
 .nav-link {
   text-decoration: none;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
   color: var(--text-light);
   font-size: var(--font-size-2);
   border-bottom: 3px solid transparent;
