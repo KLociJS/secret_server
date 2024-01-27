@@ -6,4 +6,11 @@ const NAV_LINKS = {
   VIEW_SECRET: "/view-secret",
 };
 
-export { NAV_LINKS };
+const API_URL = process.env.REACT_APP_API_URI;
+
+const API_ENDPOINTS = {
+  CREATE_SECRET: API_URL + "secret/",
+  GET_SECRET: API_URL + "secret/",
+};
+
+export { API_ENDPOINTS, NAV_LINKS };
