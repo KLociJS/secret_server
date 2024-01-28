@@ -25,8 +25,6 @@ const CreateSecret = () => {
     resetCreateSecret,
   } = usePostSecretForm();
 
-  console.log(handleSubmit);
-
   return (
     <div className='container-column'>
       {isPostSuccess ? (
