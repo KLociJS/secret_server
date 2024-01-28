@@ -2,9 +2,9 @@ import React from "react";
 
 import "./CreateSecret.css";
 import SecretForm from "./components/SecretForm";
-import useForm from "./hooks/useForm";
 
 import SecretSaveSuccess from "./components/SecretSaveSuccess";
+import usePostSecretForm from "./hooks/usePostSecretForm";
 
 const CreateSecret = () => {
   const {
@@ -23,7 +23,7 @@ const CreateSecret = () => {
     isPostSuccess,
     postSuccessData,
     resetCreateSecret,
-  } = useForm();
+  } = usePostSecretForm();
 
   return (
     <div className='container-column'>

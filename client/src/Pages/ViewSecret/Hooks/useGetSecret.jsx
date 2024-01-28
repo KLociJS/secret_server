@@ -20,7 +20,6 @@ function useGetSecret(secretHash, setSecretHash) {
       .then((data) => {
         setSecret(data.secretText);
         setIsSuccessfulFetch(true);
-        console.log(data);
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));

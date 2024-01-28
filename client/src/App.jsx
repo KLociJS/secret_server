@@ -12,6 +12,7 @@ import ViewSecret from "./Pages/ViewSecret/ViewSecret";
 
 import "./App.css";
 import { NAV_LINKS } from "./Constants/Constants";
+import NotFound from "./Pages/NotFound/NotFound";
 import "./global.css";
 
 const routes = createBrowserRouter(
@@ -20,6 +21,7 @@ const routes = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path={NAV_LINKS.VIEW_SECRET} element={<ViewSecret />} />
       <Route path={NAV_LINKS.CREATE_SECRET} element={<CreateSecret />} />
+      <Route path='*' element={<NotFound />} />
     </Route>
   )
 );
