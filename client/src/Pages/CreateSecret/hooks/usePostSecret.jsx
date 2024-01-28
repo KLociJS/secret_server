@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { API_ENDPOINTS } from "../../../Constants/Constants";
 
-function useFetch() {
+function usePostSecret() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasPostError, setHasPostError] = useState(false);
   const [isPostSuccess, setIsPostSuccess] = useState(false);
@@ -24,7 +24,6 @@ function useFetch() {
       })
       .then((data) => {
         setPostSuccessData(data);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -46,4 +45,4 @@ function useFetch() {
   };
 }
 
-export default useFetch;
+export default usePostSecret;

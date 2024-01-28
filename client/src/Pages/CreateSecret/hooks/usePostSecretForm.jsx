@@ -1,7 +1,7 @@
 import { useState } from "react";
-import useFetch from "./useFetch";
+import usePostSecret from "./usePostSecret";
 
-function useForm() {
+function usePostSecretForm() {
   const [secret, setSecret] = useState("");
   const [secretError, setSecretError] = useState(false);
   const [viewLimit, setViewLimit] = useState("");
@@ -17,7 +17,7 @@ function useForm() {
     postSuccessData,
     setIsPostSuccess,
     setPostSuccessData,
-  } = useFetch();
+  } = usePostSecret();
 
   const handleSecretChange = (e) => {
     setSecret(e.target.value);
@@ -64,8 +64,6 @@ function useForm() {
     formData.append("expireAfter", expiration);
 
     postData(formData);
-
-    console.log(secret, viewLimit, expiration);
   };
 
   const resetCreateSecret = () => {
@@ -98,4 +96,4 @@ function useForm() {
   };
 }
 
-export default useForm;
+export default usePostSecretForm;
