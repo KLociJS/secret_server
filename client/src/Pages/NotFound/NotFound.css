@@ -1,0 +1,23 @@
+.missing-icon {
+  font-size: 6rem;
+  color: var(--text-light);
+}
+
+.not-found-link {
+  padding: 0.5rem 1.5rem;
+  text-decoration: none;
+  color: var(--text-light);
+  border: 1px solid var(--background-secondary);
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    var(--background-secondary) 0%,
+    var(--background-primary) 100%
+  );
+  margin: 2rem 0 0 auto;
+  transition: border 0.3s ease-in-out;
+}
+
+.not-found-link:hover {
+  border-color: var(--background-light);
+}
