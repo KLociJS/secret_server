@@ -11,13 +11,15 @@ function useViewSecretForm() {
     isLoading,
     isSuccessfulFetch,
     getSecret,
-  } = useGetSecret(secretHash);
+    resetForm,
+  } = useGetSecret(secretHash, setSecretHash);
 
   const handleViewSecret = (e) => {
     e.preventDefault();
 
     getSecret(secretHash);
   };
+
   const handlePasteClick = async () => {
     try {
       const clipboardText = await navigator.clipboard.readText();
@@ -32,6 +34,7 @@ function useViewSecretForm() {
     setFetchError(false);
     setSecretHash(e.target.value);
   };
+
   return {
     secretHash,
     handleViewSecret,
@@ -41,6 +44,7 @@ function useViewSecretForm() {
     fetchError,
     isLoading,
     isSuccessfulFetch,
+    resetForm,
   };
 }
 

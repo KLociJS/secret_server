@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { API_ENDPOINTS } from "../../../Constants/Constants";
 
-function useGetSecret(secretHash) {
+function useGetSecret(secretHash, setSecretHash) {
   const [secret, setSecret] = useState("");
   const [fetchError, setFetchError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,12 +18,20 @@ function useGetSecret(secretHash) {
         throw new Error("Failed to fetch secret");
       })
       .then((data) => {
-        setSecret(data);
+        setSecret(data.secretText);
         setIsSuccessfulFetch(true);
         console.log(data);
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));
+  };
+
+  const resetForm = () => {
+    setSecret("");
+    setFetchError(false);
+    setIsLoading(false);
+    setIsSuccessfulFetch(false);
+    setSecretHash("");
   };
 
   return {
@@ -33,6 +41,7 @@ function useGetSecret(secretHash) {
     isLoading,
     isSuccessfulFetch,
     getSecret,
+    resetForm,
   };
 }
 

@@ -9,8 +9,15 @@ function useForm() {
   const [expiration, setExpiration] = useState("");
   const [expirationError, setExpirationError] = useState(false);
 
-  const { postData, isLoading, hasPostError, isPostSuccess, postSuccessData } =
-    useFetch();
+  const {
+    postData,
+    isLoading,
+    hasPostError,
+    isPostSuccess,
+    postSuccessData,
+    setIsPostSuccess,
+    setPostSuccessData,
+  } = useFetch();
 
   const handleSecretChange = (e) => {
     setSecret(e.target.value);
@@ -61,6 +68,17 @@ function useForm() {
     console.log(secret, viewLimit, expiration);
   };
 
+  const resetCreateSecret = () => {
+    setSecret("");
+    setSecretError(false);
+    setViewLimit("");
+    setViewLimitError(false);
+    setExpiration("");
+    setExpirationError(false);
+    setIsPostSuccess(false);
+    setPostSuccessData({});
+  };
+
   return {
     secret,
     secretError,
@@ -76,6 +94,7 @@ function useForm() {
     hasPostError,
     isPostSuccess,
     postSuccessData,
+    resetCreateSecret,
   };
 }
 

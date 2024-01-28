@@ -41,6 +41,8 @@ function useFetch() {
     hasPostError,
     isPostSuccess,
     postSuccessData,
+    setIsPostSuccess,
+    setPostSuccessData,
   };
 }
 

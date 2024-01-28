@@ -4,7 +4,7 @@ import { MdContentCopy } from "react-icons/md";
 
 import "./SecretSaveSuccess.css";
 
-function SecretSaveSuccess({ postSuccessData }) {
+function SecretSaveSuccess({ postSuccessData, resetCreateSecret }) {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(postSuccessData.hash);
   };
@@ -22,7 +22,7 @@ function SecretSaveSuccess({ postSuccessData }) {
         <p className='hash-code'>{postSuccessData.hash}</p>
         <MdContentCopy onClick={handleCopy} className='copy-icon' />
       </div>
-      <button>New Secret</button>
+      <button onClick={resetCreateSecret}>New Secret</button>
     </div>
   );
 }

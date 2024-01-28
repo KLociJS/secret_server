@@ -22,12 +22,16 @@ const CreateSecret = () => {
     hasPostError,
     isPostSuccess,
     postSuccessData,
+    resetCreateSecret,
   } = useForm();
 
   return (
     <div className='container-column'>
       {isPostSuccess ? (
-        <SecretSaveSuccess postSuccessData={postSuccessData} />
+        <SecretSaveSuccess
+          postSuccessData={postSuccessData}
+          resetCreateSecret={resetCreateSecret}
+        />
       ) : (
         <>
           <h1>Create secret</h1>
