@@ -9,8 +9,11 @@ namespace SecretApi.Services;
 
 public class SecretService : ISecretService
 {
+    // Required services: DB, Cryptographic service
     private readonly AppDataContext _appDataContext;
     private readonly ICryptographicService _cryptographicService;
+    
+    // Inject services in constructor
     public SecretService(AppDataContext appDataContext, ICryptographicService cryptographicService)
     {
         _appDataContext = appDataContext;
@@ -22,26 +25,25 @@ public class SecretService : ISecretService
     {
         try
         {
-            var currentTimestamp = DateTime.UtcNow;
-            var secret = new Secret
-            {
-                Hash = Guid.NewGuid().ToString(),
-                SecretText = _cryptographicService.Encrypt(secretRequestDto.Secret!),
-                CreatedAt = currentTimestamp,
-                ExpiresAt = currentTimestamp.AddMinutes((double)secretRequestDto.ExpireAfter!),
-                RemainingViews = (int)secretRequestDto.ExpireAfterViews!
-            };
-
+            // Create secret
+            var secret = Secret.Create(
+                secretRequestDto.Secret!,
+                (int)secretRequestDto.ExpireAfter!,
+                (int)secretRequestDto.ExpireAfterViews!
+                );
+            
+            // Create secret response dto
+            var secretResponseDto = SecretResponseDto.Create(secret);
+            
+            // Encrypt secret text
+            secret.SecretText = _cryptographicService.Encrypt(secret.SecretText);
+            
+            // Save to database
             await _appDataContext.Secrets.AddAsync(secret);
             await _appDataContext.SaveChangesAsync();
 
-            secret.SecretText = secretRequestDto.Secret!;
-
-            return new CreateSecretResult
-            {
-                Succeeded = true,
-                Data = Secret.ToSecretResponseDto(secret)
-            };
+            // Return success result with secret response dto
+            return CreateSecretResult.Success(secretResponseDto);
 
         }
         catch (Exception e)
@@ -55,30 +57,28 @@ public class SecretService : ISecretService
     {
         try
         {
+            // Query secret by hash
             var secret = await _appDataContext.Secrets.FirstOrDefaultAsync(s => s.Hash == hash);
-            var result = new GetSecretResult();
+            
+            // validate secret
             var isSecretValid = ValidateSecret(secret);
             
+            // If secret not valid (not found, expired, views limit reached) return error response
             if (!isSecretValid)
             {
-                var errorResponse = new ErrorResponse
-                {
-                    Error = "Secret not found"
-                };
-                
-                result.Error = errorResponse;
-                return result;
+                var errorResponse = ErrorResponse.Create("Secret not found");
+                return GetSecretResult.Fail(errorResponse);
             }
 
+            // If secret valid, decrement remaining views and save to database
             secret!.RemainingViews--;
             await _appDataContext.SaveChangesAsync();
 
+            // Decrypt secret text
             secret.SecretText = _cryptographicService.Decrypt(secret.SecretText);
-            
-            result.Succeeded = true;
-            result.Data = Secret.ToSecretResponseDto(secret);
-
-            return result;
+            // return success result with secret response dto
+            var secretResponseDto = SecretResponseDto.Create(secret);
+            return GetSecretResult.Success(secretResponseDto);
         }
         catch (Exception e)
         {
@@ -89,11 +89,12 @@ public class SecretService : ISecretService
 
     private static bool ValidateSecret(Secret? secret)
     {
+        // If secret not found, return false
         if(secret == null)
         {
             return false;
         }
-        
+        // If secret expired or views limit reached, return false
         return secret.RemainingViews > 0 && (secret.ExpiresAt >= DateTime.UtcNow || secret.ExpiresAt == secret.CreatedAt);
     }
 

@@ -9,6 +9,7 @@ public class CryptographicService : ICryptographicService
     // Key used for encryption.
     private readonly string _encryptionKey;
 
+    // Inject key from environment variables if it exists or throw an exception
     public CryptographicService()
     {
         _encryptionKey = Environment.GetEnvironmentVariable("ENCRYPTION_KEY")!;
