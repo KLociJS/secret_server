@@ -2,6 +2,7 @@ import { useState } from "react";
 import usePostSecret from "./usePostSecret";
 
 function usePostSecretForm() {
+  // Custom hook for handling secret form state, validating data and post action
   const [secret, setSecret] = useState("");
   const [secretError, setSecretError] = useState(false);
   const [viewLimit, setViewLimit] = useState("");
@@ -37,10 +38,12 @@ function usePostSecretForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validation rules
     const isExpirationValid = /^(?:0|[1-9]\d*)$/.test(expiration);
     const isViewLimitValid = /^[1-9]\d*$/.test(viewLimit);
     const isSecretValid = secret.length > 0;
 
+    // If any validation fails, set error state and return
     if (!isExpirationValid) {
       setExpirationError(true);
     }
@@ -57,6 +60,7 @@ function usePostSecretForm() {
       return;
     }
 
+    // If validation passes, post data to server
     const formData = new FormData();
 
     formData.append("secret", secret);
@@ -66,6 +70,7 @@ function usePostSecretForm() {
     postData(formData);
   };
 
+  // Reset page back to the form to create another secret
   const resetCreateSecret = () => {
     setSecret("");
     setSecretError(false);

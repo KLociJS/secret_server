@@ -23,25 +23,23 @@ public class SecretController : ControllerBase
     {
         try
         {
+            // Get secret by hash
             var result = await _secretService.GetSecretByHash(hash);
-
+            
+            // Check if operation succeeded
             if (result.Succeeded)
             {
                 return Ok(result.Data);
             }
             
-            
+            // Return error response if operation failed
             return NotFound(result.Error);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            
-            var errorResponse = new ErrorResponse()
-            {
-                Error = "Server error"
-            };
-            
+
+            var errorResponse = ErrorResponse.Create("Server error");
             return StatusCode(500, errorResponse);
         }
     }
@@ -51,19 +49,18 @@ public class SecretController : ControllerBase
     {
         try
         {
-            var result = await _secretService.CreateSecretAsync(secretRequestDto);
+            // Validate request happens automatically, if not valid sending 405 HTTP status code
             
+            // Create secret
+            var result = await _secretService.CreateSecretAsync(secretRequestDto);
+            // Return secret in response
             return Ok(result.Data);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            
-            var errorResponse = new ErrorResponse()
-            {
-                Error = "Server error"
-            };
-            
+
+            var errorResponse = ErrorResponse.Create("Server error");
             return StatusCode(500, errorResponse);
         }
     }

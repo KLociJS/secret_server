@@ -1,7 +1,22 @@
+/* Utility classes */
+
 .container-column {
   display: flex;
   flex-direction: column;
 }
+
+.icon-align {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-msg {
+  color: var(--text-warning);
+  min-height: 1rem;
+}
+
+/* Text */
 
 h1,
 h2,
@@ -19,18 +34,29 @@ p {
   max-width: 50ch;
 }
 
+/* Input, button, textarea, label, error variants */
+
 input,
 textarea,
+label,
 button {
   font-family: "Open Sans", sans-serif;
   font-size: var(--font-size-1);
+}
+
+label {
+  color: var(--text-light);
+}
+
+label.error {
+  color: var(--text-warning);
 }
 
 input,
 textarea {
   color: var(--text-primary);
   border-radius: 5px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   outline: none;
   border: 1px solid transparent;
 }
@@ -41,36 +67,14 @@ textarea.error {
   color: var(--text-warning);
 }
 
-.error-msg {
-  color: var(--text-warning);
-  min-height: 1rem;
-}
-
-.icon-align {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-form {
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-}
-
-.input-container {
-  display: flex;
-  flex-direction: column;
-}
-
-textarea {
-  resize: none;
-}
-
 input::placeholder,
 textarea::placeholder {
   color: var(--text-placeholder);
+}
+
+input.error::placeholder,
+textarea.error::placeholder {
+  color: var(--text-warning);
 }
 
 button {
@@ -88,4 +92,22 @@ button {
 button:hover {
   cursor: pointer;
   border-color: var(--background-light);
+}
+
+textarea {
+  resize: none;
+}
+
+/* Form */
+
+form {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
 }

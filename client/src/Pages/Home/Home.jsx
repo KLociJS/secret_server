@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { NAV_LINKS } from "../../Constants/Constants";
+import { ROUTES } from "../../Constants/Constants";
 import "./Home.css";
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
       <p className='landing-intro'>
         Safeguard your secrets with SecretSafe. Share securely, read discreetly.
       </p>
-      <Link to={NAV_LINKS.CREATE_SECRET} className='landing-cta'>
+      <Link to={ROUTES.CREATE_SECRET} className='landing-cta'>
         Get Started
       </Link>
     </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import FormInput from "../../../Components/FormInput";
 
 function SecretForm({
   secret,
@@ -16,31 +17,32 @@ function SecretForm({
 }) {
   return (
     <form className='form'>
+      <FormInput
+        name='viewLimit'
+        label='View limit'
+        value={viewLimit}
+        onChange={handleViewLimitChange}
+        hasError={viewLimitError}
+        errorMessage='Has to be a number greater than 0'
+        placeholder='Set view limit...'
+        type='number'
+      />
+
+      <FormInput
+        name='expiration'
+        label='Expiration'
+        value={expiration}
+        onChange={handleExpirationChange}
+        hasError={expirationError}
+        errorMessage='Has to be a positive number'
+        placeholder='Set expiration time in minutes...'
+        type='number'
+      />
+
       <div className='input-container'>
-        <input
-          type='text'
-          placeholder='Set view limit...'
-          value={viewLimit}
-          onChange={handleViewLimitChange}
-          className={viewLimitError ? "error" : ""}
-        />
-        <p className='error-msg'>
-          {viewLimitError ? "Has to be a number greater than 0" : ""}
-        </p>
-      </div>
-      <div className='input-container'>
-        <input
-          type='text'
-          placeholder='Set expiration time in minutes...'
-          value={expiration}
-          onChange={handleExpirationChange}
-          className={expirationError ? "error" : ""}
-        />
-        <p className='error-msg'>
-          {expirationError ? "Has to be a positive number" : ""}
-        </p>
-      </div>
-      <div className='input-container'>
+        <label htmlFor='secret' className={secretError ? "error" : ""}>
+          Secret message
+        </label>
         <textarea
           id='secret'
           rows='4'
@@ -52,9 +54,10 @@ function SecretForm({
         />
         <p className='error-msg'>
           {secretError ? "Secret is required" : ""}
-          {hasPostError ? "Something went wrong" : ""}
+          {hasPostError ? "Server may be down" : ""}
         </p>
       </div>
+
       <button onClick={handleSubmit} disabled={isLoading}>
         Save Secret
       </button>

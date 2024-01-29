@@ -2,6 +2,8 @@ import { useState } from "react";
 import { API_ENDPOINTS } from "../../../Constants/Constants";
 
 function usePostSecret() {
+  // Handle fetching the data from the server
+  // Loading => Request => Success/Error => Loaded
   const [isLoading, setIsLoading] = useState(false);
   const [hasPostError, setHasPostError] = useState(false);
   const [isPostSuccess, setIsPostSuccess] = useState(false);
@@ -19,7 +21,7 @@ function usePostSecret() {
           setIsPostSuccess(true);
           return res.json();
         } else {
-          throw new Error("Something went wrong");
+          throw new Error("Server may be down");
         }
       })
       .then((data) => {

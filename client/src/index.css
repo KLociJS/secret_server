@@ -1,11 +1,13 @@
+/* Font import */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Open+Sans&display=swap");
 
+/* CSS variables */
 :root {
   --text-light: #eeeeee;
   --text-warning: #fb4949;
   --text-primary: #1f1f1f;
   --text-secondary: #ececec;
-  --text-placeholder: #797979;
+  --text-placeholder: #444444;
   --text-success: #57c600;
 
   --background-primary: #252570;
@@ -21,10 +23,12 @@
   --secondary-font: "Open Sans", sans-serif;
 }
 
+/* Set rem value */
 html {
   font-size: 16px;
 }
 
+/* Main full width */
 html,
 body {
   height: 100%;
@@ -40,6 +44,8 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/* Reset */
 
 * {
   margin: 0;
