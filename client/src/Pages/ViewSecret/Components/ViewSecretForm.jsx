@@ -1,4 +1,5 @@
 import React from "react";
+import FormInput from "../../../Components/FormInput";
 
 const ViewSecretForm = ({
   secretHash,
@@ -10,17 +11,16 @@ const ViewSecretForm = ({
 }) => {
   return (
     <form>
-      <div className='input-container'>
-        <input
-          type='text'
-          placeholder='Secret redeem code...'
-          value={secretHash}
-          onChange={handleHashChange}
-          onClick={handlePasteClick}
-          className={fetchError ? "error" : ""}
-        />
-        <p className='error-msg'>{fetchError ? "Secret not found." : ""}</p>
-      </div>
+      <FormInput
+        name='secretHash'
+        label='Secret hash'
+        value={secretHash}
+        onChange={handleHashChange}
+        placeholder='Secret redeem code...'
+        hasError={fetchError}
+        errorMessage='Secret not found.'
+      />
+
       <button onClick={handleViewSecret} disabled={isLoading}>
         View Secret
       </button>

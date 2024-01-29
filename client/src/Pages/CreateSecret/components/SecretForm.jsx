@@ -1,5 +1,5 @@
 import React from "react";
-import FormInput from "./FormInput";
+import FormInput from "../../../Components/FormInput";
 
 function SecretForm({
   secret,
