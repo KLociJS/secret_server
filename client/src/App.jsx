@@ -5,22 +5,25 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
+// Pages
 import CreateSecret from "./Pages/CreateSecret/CreateSecret";
 import Home from "./Pages/Home/Home";
 import Layout from "./Pages/Layout/Layout";
+import NotFound from "./Pages/NotFound/NotFound";
 import ViewSecret from "./Pages/ViewSecret/ViewSecret";
 
+import { ROUTES } from "./Constants/Constants";
+
 import "./App.css";
-import { NAV_LINKS } from "./Constants/Constants";
-import NotFound from "./Pages/NotFound/NotFound";
 import "./global.css";
 
+// Create the routes for the app
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path={NAV_LINKS.VIEW_SECRET} element={<ViewSecret />} />
-      <Route path={NAV_LINKS.CREATE_SECRET} element={<CreateSecret />} />
+      <Route path={ROUTES.VIEW_SECRET} element={<ViewSecret />} />
+      <Route path={ROUTES.CREATE_SECRET} element={<CreateSecret />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

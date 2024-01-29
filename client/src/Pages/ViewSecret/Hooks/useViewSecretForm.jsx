@@ -2,6 +2,7 @@ import { useState } from "react";
 import useGetSecret from "./useGetSecret";
 
 function useViewSecretForm() {
+  // Custom hook for handling view secret form state, validating data and post action
   const [secretHash, setSecretHash] = useState("");
 
   const {

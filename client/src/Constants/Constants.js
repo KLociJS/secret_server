@@ -1,6 +1,6 @@
 // Nav constants
 
-const NAV_LINKS = {
+const ROUTES = {
   HOME: "/",
   CREATE_SECRET: "/create-secret",
   VIEW_SECRET: "/view-secret",
@@ -13,4 +13,4 @@ const API_ENDPOINTS = {
   GET_SECRET: API_URL + "secret/",
 };
 
-export { API_ENDPOINTS, NAV_LINKS };
+export { API_ENDPOINTS, ROUTES };
