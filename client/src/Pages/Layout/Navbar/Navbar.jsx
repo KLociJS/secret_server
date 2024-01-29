@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { IoMdClose, IoMdMenu } from "react-icons/io";
-import { NAV_LINKS } from "../../../Constants/Constants";
+import { ROUTES } from "../../../Constants/Constants";
 
 import "./Navbar.css";
 
 const links = [
   {
-    to: NAV_LINKS.CREATE_SECRET,
+    to: ROUTES.CREATE_SECRET,
     text: "Create Secret",
   },
   {
-    to: NAV_LINKS.VIEW_SECRET,
+    to: ROUTES.VIEW_SECRET,
     text: "View Secret",
   },
 ];

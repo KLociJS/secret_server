@@ -12,15 +12,17 @@ public class Secret
     public DateTime ExpiresAt { get; set; }
     public int RemainingViews { get; set; }
     
-    public static SecretResponseDto ToSecretResponseDto(Secret secret)
+    public static Secret Create(string secretText, int expireAfter, int expireAfterViews)
     {
-        return new SecretResponseDto
+        var currentTimestamp = DateTime.UtcNow;
+        
+        return new Secret
         {
-            Hash = secret.Hash,
-            SecretText = secret.SecretText,
-            CreatedAt = secret.CreatedAt,
-            ExpiresAt = secret.ExpiresAt,
-            RemainingViews = secret.RemainingViews
+            Hash = Guid.NewGuid().ToString(),
+            SecretText = secretText,
+            CreatedAt = currentTimestamp,
+            ExpiresAt = currentTimestamp.AddMinutes((double)expireAfter),
+            RemainingViews = expireAfterViews
         };
     }
 }
