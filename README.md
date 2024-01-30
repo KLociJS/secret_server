@@ -2,7 +2,7 @@
 
 ## Live website:
 
-[Visit Live!](http://3.79.241.113/)
+[Visit Live!](https://klocijs.com/)
 
 ## Description
 
